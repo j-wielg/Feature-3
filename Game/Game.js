@@ -7,10 +7,12 @@ import {
   useEffect,
 } from "https://unpkg.com/htm/preact/standalone.module.js";
 
+import { Board } from "./Board.js";
+
 // Helper function that fetches game data
 export function fetchGame() {
   const axios = window.axios;
-  return axios.get("../JSON/start_game.json").then((response) => {
+  return axios.get("../JSON/sample_game.json").then((response) => {
     return response.data;
   });
 }
@@ -19,5 +21,14 @@ export function fetchGame() {
 // Requires the game to be in the correct JSON format
 export function Game(gamestate) {
   gamestate = gamestate.gamestate;
-  return html` <h2>${gamestate.turn}</h2> `;
+  // Converts the player from +-1 to 1 or 2
+  var convert_player = (p) => {
+    if (p == 1) return "1";
+    else return "2";
+  };
+  return html`
+    <p>Turn: ${gamestate.turn}</p>
+    <p>Player: ${convert_player(gamestate.player)}</p>
+    <${Board} pieces="${gamestate.board}" />
+  `;
 }
