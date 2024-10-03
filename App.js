@@ -5,10 +5,20 @@ import {
   useEffect,
 } from "https://unpkg.com/htm/preact/standalone.module.js";
 
-import { Game } from "./Game/Game.js";
+import { Game, fetchGame } from "./Game/Game.js";
 
 function App() {
-  return html` <${Game}></${Game}> `;
+  // Manages the game state
+  const [gamedata, setGamedata] = useState({});
+
+  // Change the gamestate when the axios request completes
+  useEffect(() => {
+    fetchGame().then((game) => {
+      setGamedata(game);
+      console.log("Received gamestate JSON: ", game);
+    });
+  }, []);
+  return html` <${Game} gamestate=${gamedata}></${Game}> `;
 }
 
 render(html` <${App} /> `, document.getElementById("app"));

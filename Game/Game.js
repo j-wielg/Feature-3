@@ -7,8 +7,17 @@ import {
   useEffect,
 } from "https://unpkg.com/htm/preact/standalone.module.js";
 
+// Helper function that fetches game data
+export function fetchGame() {
+  const axios = window.axios;
+  return axios.get("../JSON/start_game.json").then((response) => {
+    return response.data;
+  });
+}
+
 // Component that renders the game
 // Requires the game to be in the correct JSON format
 export function Game(gamestate) {
-  return html` <h2>Hello</h2> `;
+  gamestate = gamestate.gamestate;
+  return html` <h2>${gamestate.turn}</h2> `;
 }
