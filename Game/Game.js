@@ -9,6 +9,6 @@ import {
 
 // Component that renders the game
 // Requires the game to be in the correct JSON format
-function Game(gamestate) {
+export function Game(gamestate) {
   return html` <h2>Hello</h2> `;
 }

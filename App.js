@@ -5,8 +5,10 @@ import {
   useEffect,
 } from "https://unpkg.com/htm/preact/standalone.module.js";
 
+import { Game } from "./Game/Game.js";
+
 function App() {
-  return html` <h1>Put title here</h1> `;
+  return html` <${Game}></${Game}> `;
 }
 
 render(html` <${App} /> `, document.getElementById("app"));
